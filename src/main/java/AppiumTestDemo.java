@@ -1,6 +1,6 @@
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import pro.truongsinh.appium_flutter.FlutterFinder;
 import pro.truongsinh.appium_flutter.finder.FlutterElement;
@@ -17,12 +17,12 @@ public class AppiumTestDemo {
         System.out.println("测试app文件路径：" + appFile.getAbsolutePath());
         appPtah = appFile.getAbsolutePath();
 
-        AndroidDriver<WebElement> driver = getFlutterDriver();
+        AndroidDriver<MobileElement> driver = getFlutterDriver();
 
         // 切换成本地的代码
         driver.context("NATIVE_APP");
 
-        WebElement openNativeWebElement = driver.findElementById("com.taobao.idlefish.flutterboostexample:id/open_flutter");
+        MobileElement openNativeWebElement = driver.findElementById("com.taobao.idlefish.flutterboostexample:id/open_flutter");
         openNativeWebElement.click();
         System.out.println("点击完成跳转至flutter页面完成");
 
@@ -44,7 +44,7 @@ public class AppiumTestDemo {
         driver.quit();
     }
 
-    public static AndroidDriver<WebElement> getFlutterDriver() {
+    public static AndroidDriver<MobileElement> getFlutterDriver() {
         System.out.println("getFlutterDriver");
 
         DesiredCapabilities flutterCapabilities = new DesiredCapabilities();
@@ -56,7 +56,7 @@ public class AppiumTestDemo {
         flutterCapabilities.setCapability("automationName", "Flutter");
 
         AppiumDriverLocalService service = AppiumDriverLocalService.buildDefaultService();
-        AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(service.getUrl(), flutterCapabilities);
+        AndroidDriver<MobileElement> driver = new AndroidDriver<MobileElement>(service.getUrl(), flutterCapabilities);
 
         System.out.println("getFlutterDriver finish");
         return driver;
